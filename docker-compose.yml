@@ -1,0 +1,37 @@
+version: "3.2"
+
+services:
+  flask:
+    command: ["python", "app.py"]
+    build:
+      context: "."
+      dockerfile: "flask.dockerfile"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/opt/app
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    networks:
+      - main
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=main
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password_user
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - main
+
+networks:
+  main:
+    driver: "bridge"
