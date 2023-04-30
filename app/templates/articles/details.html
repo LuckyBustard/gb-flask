@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Article #{{ article_id }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    {{ article.text }}
+{% endblock %}

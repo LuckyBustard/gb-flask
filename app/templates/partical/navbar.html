@@ -1,0 +1,10 @@
+<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    APP
+</a>
+<ul class="nav nav-pills">
+    {% for (endpoint, label) in [('users_app.list', 'Users'), ('articles_app.list', 'Articles')] %}
+        <li class="nav-item">
+            <a href="{{ url_for(endpoint) }}" class="nav-link">{{ label }}</a>
+        </li>
+    {% endfor %}
+</ul>

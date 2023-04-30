@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
+from views.users import users_app
+from views.articles import articles_app
 
 app = Flask(__name__)
 
@@ -9,7 +11,11 @@ def index():
 
 
 if __name__ == "__main__":
+    app.register_blueprint(users_app, url_prefix="/users")
+    app.register_blueprint(articles_app, url_prefix="/articles")
+
     app.run(
         host="0.0.0.0",
-        port=8000
+        port=8000,
+        debug=True
     )
