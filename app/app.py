@@ -1,17 +1,18 @@
+import os
 from flask import Flask
 from views.users import users_app
 from views.articles import articles_app
 from models.database import db
 from models import User
 from views.auth import auth_app, login_manager
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////opt/app/data/app.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
+app.config.from_object(f"configs.{cfg_name}")
 db.init_app(app)
-app.config["SECRET_KEY"] = "abcdefg123456"
+migrate = Migrate(app, db)
 
 
 @app.route("/")
