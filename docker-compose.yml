@@ -11,6 +11,9 @@ services:
     volumes:
       - ./app:/opt/app
       - ./data:/opt/app/data
+    environment:
+      SQLALCHEMY_DATABASE_URI: "postgresql://user:password_user@postgres:5432/main"
+      CONFIG_NAME: "DevConfig"
     depends_on:
       - postgres
     links:
