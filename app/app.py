@@ -4,6 +4,7 @@ from views.users import users_app
 from views.articles import articles_app
 from models.database import db
 from models import User
+from security import flask_bcrypt
 from views.auth import auth_app, login_manager
 from flask_migrate import Migrate
 
@@ -12,28 +13,14 @@ app = Flask(__name__)
 cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
 app.config.from_object(f"configs.{cfg_name}")
 db.init_app(app)
+app.config["SECRET_KEY"] = "abcdefg123456"
+flask_bcrypt.init_app(app)
 migrate = Migrate(app, db)
 
 
 @app.route("/")
 def index():
     return 'index page'
-
-
-@app.cli.command("init-db")
-def init_db():
-    db.create_all()
-    print("done!")
-
-
-@app.cli.command("create-users")
-def create_users():
-    admin = User(username="admin", is_staff=True)
-    james = User(username="james")
-    db.session.add(admin)
-    db.session.add(james)
-    db.session.commit()
-    print("done! created users:", admin, james)
 
 
 if __name__ == "__main__":
