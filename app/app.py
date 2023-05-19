@@ -2,8 +2,8 @@ import os
 from flask import Flask
 from views.users import users_app
 from views.articles import articles_app
+from views.authors import authors_app
 from models.database import db
-from models import User
 from security import flask_bcrypt
 from views.auth import auth_app, login_manager
 from flask_migrate import Migrate
@@ -27,6 +27,7 @@ if __name__ == "__main__":
     app.register_blueprint(users_app, url_prefix="/users")
     app.register_blueprint(articles_app, url_prefix="/articles")
     app.register_blueprint(auth_app, url_prefix="/auth")
+    app.register_blueprint(authors_app, url_prefix="/authors")
     login_manager.init_app(app)
 
     app.run(

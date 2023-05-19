@@ -6,7 +6,7 @@
     {% endif %}
 </a>
 <ul class="nav nav-pills">
-    {% for (endpoint, label) in [('users_app.list', 'Users'), ('articles_app.list', 'Articles')] %}
+    {% for (endpoint, label) in [('users_app.list', 'Users'), ('articles_app.list', 'Articles'), ('authors_app.list', 'Authors')] %}
         <li class="nav-item">
             <a href="{{ url_for(endpoint) }}" class="nav-link">{{ label }}</a>
         </li>
