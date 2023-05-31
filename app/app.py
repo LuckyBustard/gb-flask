@@ -8,6 +8,7 @@ from security import flask_bcrypt
 from views.auth import auth_app, login_manager
 from flask_migrate import Migrate
 from models.tag import Tag
+from api import init_api
 from admin import admin
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ app.config["SECRET_KEY"] = "abcdefg123456"
 flask_bcrypt.init_app(app)
 migrate = Migrate(app, db)
 admin.init_app(app)
+api = init_api(app)
 
 
 @app.cli.command("create-tags")

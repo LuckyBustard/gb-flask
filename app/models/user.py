@@ -6,6 +6,12 @@ from security import flask_bcrypt
 
 
 class User(db.Model, UserMixin):
+    class Meta:
+        type_ = "user"
+        self_view = "user_detail"
+        self_view_kwargs = {"id": "<id>"}
+        self_view_many = "user_list"
+
     id = Column(Integer, primary_key=True)
     username = Column(String(80), unique=True, nullable=False)
     is_staff = Column(Boolean, nullable=False, default=False)
