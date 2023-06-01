@@ -8,6 +8,7 @@ from security import flask_bcrypt
 from views.auth import auth_app, login_manager
 from flask_migrate import Migrate
 from models.tag import Tag
+from models.user import User
 from api import init_api
 from admin import admin
 
@@ -41,6 +42,24 @@ def create_tags():
 
     db.session.commit()
     print("created tags")
+
+
+@app.cli.command("create-admin")
+def create_tags():
+    """
+    Run in your terminal:
+    ➜ flask create-user
+    """
+    user = User(
+        username='admin',
+        is_staff=True,
+        email='admin@damin.ru',
+        password='1234'
+    )
+    db.session.add(user)
+
+    db.session.commit()
+    print("created user")
 
 
 @app.route("/")
