@@ -48,13 +48,13 @@ def index():
     return 'index page'
 
 
-if __name__ == "__main__":
-    app.register_blueprint(users_app, url_prefix="/users")
-    app.register_blueprint(articles_app, url_prefix="/articles")
-    app.register_blueprint(auth_app, url_prefix="/auth")
-    app.register_blueprint(authors_app, url_prefix="/authors")
-    login_manager.init_app(app)
+app.register_blueprint(users_app, url_prefix="/users")
+app.register_blueprint(articles_app, url_prefix="/articles")
+app.register_blueprint(auth_app, url_prefix="/auth")
+app.register_blueprint(authors_app, url_prefix="/authors")
+login_manager.init_app(app)
 
+if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=8000,
